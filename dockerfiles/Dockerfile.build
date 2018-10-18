@@ -1,0 +1,4 @@
+FROM golang:1.10.3-alpine3.7
+RUN apk add --no-cache -U git make bash build-base
+WORKDIR /go/src/github.com/HotelsDotCom/node-reaper
+ENTRYPOINT ["make"]

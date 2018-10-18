@@ -1,0 +1,17 @@
+apiVersion: v1
+appVersion: 0.8
+description: Node reaper reaps unhealthy Kubernetes nodes based on metadata then drains and optionally deletes backing virtual servers.
+engine: gotpl
+# TODO: update home
+# home: https://github.com/coreos/alb-ingress-controller
+keywords:
+  - node
+  - reaper
+maintainers:
+  - name: Riccardo Freixo
+    email: riccardofreixo@gmail.com
+name: node-reaper
+# TODO: update sources
+# sources:
+#   - https://github.com/coreos/alb-ingress-controller
+version: 0.1.0

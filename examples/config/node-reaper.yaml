@@ -1,0 +1,43 @@
+---
+# reapPredicate defines a govaluate expression which decides if a node is a candidate for reaping.
+reapPredicate: |-
+  Cordoned                       == false
+  && [Labels.kubernetes.io/role] != 'master'
+  && [Conditions.Ready]          != 'True'
+
+# unhealthyPredicate defines a govaluate expression which decides if nodes in the cluster are unhealthy. Used for cluster health checks before reaping.
+unhealthyPredicate: |-
+  Cordoned                       == true
+  || [Conditions.OutOfDisk]      != 'False'
+  || [Conditions.MemoryPressure] != 'False'
+  || [Conditions.DiskPressure]   != 'False'
+  || [Conditions.Ready]          != 'True'
+
+# maxNodesUnhealthy defines how many nodes can be unhealthy in the cluster, if more nodes than maxNodesUnhealthy are unhealthy reaping will be cancelled.
+# Must be a positive integer or a percentage between 0% and 100%.
+maxNodesUnhealthy: 1
+
+# maxNodesUnhealthyInSameZone defines how many nodes can be unhealthy in the same zone of the cluster as the reap candidate, if more nodes than maxNodesUnhealthy are unhealthy reaping will be cancelled.
+# Must be a positive integer or a percentage between 0% and 100%.
+maxNodesUnhealthyInSameZone: 1
+
+# newNodeGracePeriodSeconds defines the time after a node's creation when it can be reaped. Nodes whose creation timestamp fall within the grace period won't be reaped.
+newNodeGracePeriodSeconds: 300
+
+# drainTimeoutSeconds defines the time after which node reaper will fail an unfinished drain attempt.
+drainTimeoutSeconds: 310
+
+# drainForceRetryOnError instructs node reaper to retry draining once with podDeletionGracePeriodSeconds set to 0 and useEviction set to false.
+drainForceRetryOnError: true
+
+# podDeletionGracePeriodSeconds defines the GracePeriodSeconds on the eviction or deletion call to the kubernetes api.
+podDeletionGracePeriodSeconds: 300
+
+# useEviction instructs node reaper to use the pod eviction api when draining as opposed to the deletion api.
+useEviction: true
+
+# skipReaping instructs node reaper to never reap the underlying node, stopping after draining.
+skipReaping: false
+
+# dryRun instructs node reaper to never drain or reap nodes, logging instead.
+dryRun: true

@@ -1,0 +1,6 @@
+FROM alpine:3.7
+RUN apk add --no-cache -U ca-certificates
+COPY bin/plugins /plugins
+COPY bin/node-reaper /node-reaper
+WORKDIR /
+ENTRYPOINT ["/node-reaper"]
