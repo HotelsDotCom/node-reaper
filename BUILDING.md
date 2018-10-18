@@ -3,7 +3,7 @@
 ## Download this repo locally
 
 ```
-$ go get https://github.com/HotelsDotCom/node-reaper
+$ go get github.com/HotelsDotCom/node-reaper
 ```
 
 ## Build the binary and container
